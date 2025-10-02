@@ -1,4 +1,5 @@
 package Task4;
 
-public interface StringBuilderObserver {
+interface StringBuilderObserver {
+    void onChange(String newValue);
 }
