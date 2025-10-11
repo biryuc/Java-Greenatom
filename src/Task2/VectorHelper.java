@@ -1,3 +1,5 @@
+package Task2;
+
 import java.util.Random;
 
 public class VectorHelper {
@@ -34,7 +36,7 @@ public class VectorHelper {
 
         // Проверка деления на ноль
         if (lengthProduct == 0) {
-            return 0;
+            throw new ArithmeticException("N должно быть положительным числом");
         }
         return dotProduct / lengthProduct;
     }
@@ -63,6 +65,24 @@ public class VectorHelper {
         }
 
         return vectors;
+    }
+
+    public static void main(String[] args){
+
+        VectorHelper v1 = new VectorHelper(1,2,3);
+
+        try{
+            VectorHelper[] vectors = VectorHelper.generateRandomVectors(-1);
+            double vectorcos = v1.vectorCosinus(v1);
+            System.out.println(vectorcos);
+        }catch (ArithmeticException e){
+            System.out.println(e.getMessage());
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
 

@@ -3,21 +3,21 @@ package Task4;
 public class Main {
     public static void main(String[] args) {
         ObservableStringBuilder osb = new ObservableStringBuilder("Рукописи");
-
-        // Добавляем наблюдателя
         osb.addObserver(newValue -> System.out.println("Изменение: " + newValue));
 
-        // Делаем изменения
-        osb.append(" не");
-        osb.append(" горят");
+        try {
+            osb.append(" не горят");
+            osb.replace(0, 9, "Рукописи всё же");
+            osb.delete(9, 15);
+            osb.reverse();
 
-        // Попробуем заменить часть строки
-        osb.replace(0, 9, "Рукописи всё же");
 
-        // Удалим добавленное " всё же"
-        osb.delete(9, 15);
+            osb.insert(100, "ошибка");
 
-        // Для красоты развернём строку
-        osb.reverse();
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Ошибка индекса: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Общая ошибка: " + e.getMessage());
+        }
     }
 }

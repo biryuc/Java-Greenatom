@@ -1,6 +1,8 @@
+package Task1;
+
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 public class ArrHelper {
 
     public static int[] generateArrInt(int size, int min,int max){
@@ -163,49 +165,56 @@ public class ArrHelper {
         System.out.println("Отсортированный по убыванию: " + Arrays.toString(descending));
     }
 
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Ввод размера массива
+    public static int readPositiveInt(Scanner scanner,String prompt, String errorMessage){
         System.out.print("Введите размер массива: ");
         int size = scanner.nextInt();
 
-        if (size <= 0) {
-            System.out.println("Ошибка: размер массива должен быть больше 0");
-            scanner.close();
-            return;
-        }
+        if (size <= 0) throw new IllegalArgumentException(errorMessage);
+        return size;
+    }
 
-        // Ввод границ генерации
-        System.out.print("Введите нижнюю границу : ");
-        double min = scanner.nextDouble();
-        System.out.print("Введите верхнюю границу : ");
-        double max = scanner.nextDouble();
+    private static void validateRange(double min, double max) {
+        if (min >= max) throw new IllegalArgumentException(
+                "Ошибка: нижняя граница должна быть меньше верхней");
+    }
 
-        if (min >= max) {
-            System.out.println("Ошибка: нижняя граница должна быть меньше верхней");
-            scanner.close();
-            return;
-        }
-
-        // Выбор типа данных
+    private static void processChoice(Scanner scanner, int size, double min, double max) {
         System.out.print("Выберите тип данных (1 - целые числа, 2 - дробные числа): ");
         int choice = scanner.nextInt();
 
-        if (choice == 1) {
-            // Работа с целыми числами
-            int[] intArray = generateArrInt(size, (int)min, (int)max);
-            processArrInt(intArray);
-        } else if (choice == 2) {
-            // Работа с дробными числами
-            double[] doubleArray = generateArrDouble(size, min, max);
-            processArrDouble(doubleArray);
-        } else {
-            System.out.println("Неверный выбор типа данных");
+        switch (choice) {
+            case 1 -> processArrInt(generateArrInt(size, (int)min, (int)max));
+            case 2 -> processArrDouble(generateArrDouble(size, min, max));
+            default -> throw new IllegalArgumentException("Неверный выбор типа данных");
+        }
+    }
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+
+        try {
+            int size = readPositiveInt(scanner,"Введите размер массива: ","Ошибка: размер массива должен быть больше 0");
+
+            System.out.print("Введите нижнюю границу : ");
+            double min = scanner.nextDouble();
+            System.out.print("Введите верхнюю границу : ");
+            double max = scanner.nextDouble();
+
+            validateRange( min,max);
+
+            processChoice( scanner,  size,  min,  max);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка ввода: введите корректное число!");
+            scanner.next();
+        } catch (Exception e) {
+                throw new RuntimeException(e);
+        } finally {
+            scanner.close();
         }
 
-        scanner.close();
     }
 
 }

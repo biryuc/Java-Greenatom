@@ -20,11 +20,17 @@ public class ObservableStringBuilder {
 
 
     public void addObserver(StringBuilderObserver observer) {
+        if (observer == null) {
+            throw new IllegalArgumentException("Наблюдатель не может быть null");
+        }
         observers.add(observer);
     }
 
 
     public void removeObserver(StringBuilderObserver observer) {
+        if (observer == null) {
+            throw new IllegalArgumentException("Наблюдатель не может быть null");
+        }
         observers.remove(observer);
     }
 
@@ -37,32 +43,66 @@ public class ObservableStringBuilder {
 
 
     public ObservableStringBuilder append(String str) {
-        sb.append(str);
-        notifyObservers();
+        try {
+            sb.append(str);
+            notifyObservers();
+        }catch (Exception e){
+            throw new RuntimeException("Ошибка при добавлении строки: " + str, e);
+        }
         return this;
     }
 
     public ObservableStringBuilder delete(int start, int end) {
-        sb.delete(start, end);
-        notifyObservers();
+        try {
+            sb.delete(start, end);
+
+            notifyObservers();
+        }catch (StringIndexOutOfBoundsException e){
+            throw new StringIndexOutOfBoundsException(
+                    String.format("Некорректный диапазон удаления: start=%d, end=%d, длина=%d",
+                            start, end, sb.length()));
+        }
+        catch (Exception e ){
+            throw new RuntimeException("Ошибка при удалении", e);
+        }
         return this;
     }
 
     public ObservableStringBuilder insert(int offset, String str) {
+     try{
         sb.insert(offset, str);
         notifyObservers();
+    } catch (StringIndexOutOfBoundsException e) {
+        throw new StringIndexOutOfBoundsException(
+                String.format("Некорректная позиция вставки: offset=%d, длина=%d",
+                        offset, sb.length()));
+    } catch (Exception e) {
+        throw new RuntimeException("Ошибка при вставке", e);
+    }
         return this;
     }
 
     public ObservableStringBuilder replace(int start, int end, String str) {
+    try{
         sb.replace(start, end, str);
         notifyObservers();
+    } catch (StringIndexOutOfBoundsException e) {
+        throw new StringIndexOutOfBoundsException(
+                String.format("Некорректный диапазон замены: start=%d, end=%d, длина=%d",
+                        start, end, sb.length()));
+    } catch (Exception e) {
+        throw new RuntimeException("Ошибка при замене", e);
+    }
         return this;
     }
 
     public ObservableStringBuilder reverse() {
-        sb.reverse();
-        notifyObservers();
+        try{
+            sb.reverse();
+            notifyObservers();
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка при реверсе строки", e);
+        }
         return this;
     }
 
