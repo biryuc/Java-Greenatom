@@ -2,6 +2,8 @@ package Task2;
 
 import java.util.Random;
 
+
+
 public class VectorHelper {
 
     private double x,y,z;
