@@ -165,6 +165,8 @@ public class ArrHelper {
         System.out.println("Отсортированный по убыванию: " + Arrays.toString(descending));
     }
 
+
+
     public static int readPositiveInt(Scanner scanner,String prompt, String errorMessage){
         System.out.print("Введите размер массива: ");
         int size = scanner.nextInt();
