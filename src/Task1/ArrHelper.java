@@ -212,7 +212,11 @@ public class ArrHelper {
             System.out.println("Ошибка ввода: введите корректное число!");
             scanner.next();
         } catch (Exception e) {
+<<<<<<< Updated upstream
                 throw new RuntimeException(e);
+=======
+            throw new RuntimeException(e);
+>>>>>>> Stashed changes
         } finally {
             scanner.close();
         }
