@@ -71,6 +71,7 @@ public class VectorHelper {
 
     public static void main(String[] args){
 
+
         VectorHelper v1 = new VectorHelper(1,2,3);
 
         try{
@@ -88,4 +89,7 @@ public class VectorHelper {
     }
 
 
-}
+
+    }
+
+
