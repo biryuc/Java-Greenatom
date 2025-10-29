@@ -70,26 +70,7 @@ public class VectorHelper {
     }
 
     public static void main(String[] args){
-<<<<<<< Updated upstream
 
-        VectorHelper v1 = new VectorHelper(1,2,3);
-
-        try{
-            VectorHelper[] vectors = VectorHelper.generateRandomVectors(-1);
-            double vectorcos = v1.vectorCosinus(v1);
-            System.out.println(vectorcos);
-        }catch (ArithmeticException e){
-            System.out.println(e.getMessage());
-        }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-=======
->>>>>>> Stashed changes
 
         VectorHelper v1 = new VectorHelper(1,2,3);
 
@@ -108,4 +89,7 @@ public class VectorHelper {
     }
 
 
-}
+
+    }
+
+

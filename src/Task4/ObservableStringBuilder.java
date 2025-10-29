@@ -71,7 +71,7 @@ public class ObservableStringBuilder {
     }
 
     public ObservableStringBuilder insert(int offset, String str) {
-<<<<<<< Updated upstream
+
      try{
         sb.insert(offset, str);
         notifyObservers();
@@ -82,7 +82,7 @@ public class ObservableStringBuilder {
     } catch (Exception e) {
         throw new RuntimeException("Ошибка при вставке", e);
     }
-=======
+
         try{
             sb.insert(offset, str);
             notifyObservers();
@@ -93,12 +93,12 @@ public class ObservableStringBuilder {
         } catch (Exception e) {
             throw new RuntimeException("Ошибка при вставке", e);
         }
->>>>>>> Stashed changes
+
         return this;
     }
 
     public ObservableStringBuilder replace(int start, int end, String str) {
-<<<<<<< Updated upstream
+
     try{
         sb.replace(start, end, str);
         notifyObservers();
@@ -109,7 +109,7 @@ public class ObservableStringBuilder {
     } catch (Exception e) {
         throw new RuntimeException("Ошибка при замене", e);
     }
-=======
+
         try{
             sb.replace(start, end, str);
             notifyObservers();
@@ -120,7 +120,7 @@ public class ObservableStringBuilder {
         } catch (Exception e) {
             throw new RuntimeException("Ошибка при замене", e);
         }
->>>>>>> Stashed changes
+
         return this;
     }
 
